@@ -2,28 +2,30 @@
   <Loading :active="isLoading" style="z-index: 9999" />
   <div class="container">
     <div class="row">
-      <div class="col-3">
-        <select v-model="currentCategory">
+      <div class="col-4">
+        <select v-model="currentCategory" @change="getBusData">
           <option value="">請選擇縣市</option>
           <option :value="item.City" v-for="item in city" :key="item">
             {{ item.CityName }}
           </option>
         </select>
-        <button type="button" class="btn btn-primary btn-sm ms-5" @click="getBusData">查詢</button>
-        <div class="row gy-2 mt-2 scroll">
-          <div
-            class="col-12"
-            v-for="item in busRoute"
-            :key="item.RouteUID"
-            @click="setBusData(item.RouteName.Zh_tw)"
-          >
-            <div class="card">
-              <div class="card-body">{{ item.RouteName.Zh_tw }}</div>
-            </div>
-          </div>
-        </div>
+        <br />
+        <select v-model="currentRoute">
+          <option value="">請選擇路線</option>
+          <option :value="item.RouteName.Zh_tw" v-for="item in busRoute" :key="item">
+            {{ item.RouteName.Zh_tw }}
+          </option>
+        </select>
+        <br />
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          @click="setBusData(currentRoute)"
+        >
+          查詢
+        </button>
       </div>
-      <div class="col-9">
+      <div class="col-8">
         <div id="mapid" class="map"></div>
       </div>
     </div>
@@ -57,6 +59,7 @@ export default {
       },
       city: [],
       currentCategory: '',
+      currentRoute: '',
       busRoute: [],
       busSite: [],
       busLine: [],
