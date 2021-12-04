@@ -33,8 +33,8 @@
 </template>
 
 <script>
-import Wkt from 'wicket';
 import L from 'leaflet';
+import Wkt from 'wicket';
 import 'leaflet.markercluster/dist/leaflet.markercluster';
 import getAuthorizationHeader from '../tools/AuthorizationHeader';
 
